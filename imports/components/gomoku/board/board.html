@@ -1,0 +1,24 @@
+<template name="board">
+    <div class="grid-wrapper">
+        <div class="grid">
+            {{#each item in room.boardGrid}}
+            <div class="grid__row">
+                {{#let rowIndex=@index}}
+                {{#each item}}
+                <div class="grid__cell {{type}}" data-row="{{rowIndex}}" data-col="{{@index}}"></div>
+                {{/each}}
+                {{/let}}
+            </div>
+            {{/each}}
+        </div>
+        <div class="clear"></div>
+        {{#if room.winner}}
+        <div class="game-result">
+            <div class="game-result__message">
+                <p>Player {{room.winner}} has won!!</p>
+            </div>
+        </div>
+        {{/if}}
+    </div>
+</template>
+

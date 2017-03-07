@@ -1,0 +1,44 @@
+﻿.login-wrapper {
+    background: #fff;
+    
+    height: 100%;
+    padding-top: 200px;
+}
+
+.login-form {
+    width: 400px;
+    margin: auto;
+    background-color: #fff;
+    border-radius: 3px;
+    box-shadow: 0 3px 7px rgba(0,0,0,.1);
+    padding: 15px 30px;
+    border: solid 1px white;
+}
+
+.login-form h1 {
+    color: #323232;
+    font-size: 21px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.login-form > p {
+    text-align: center;
+}
+
+.login-form label {
+    color: #666;
+    font-size: 13px;
+}
+
+.login-form .btn.btn-primary {
+    padding: 7px 16px;
+    background: #4fa4f4 none repeat scroll 0 0;
+    border: 1px solid #157cb4;
+    color: #fff;
+    transition: none 0s ease 0s;
+    font-weight: 700;
+    width: 100%;
+    border-radius: 0;
+}
+

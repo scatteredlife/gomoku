@@ -1,0 +1,16 @@
+﻿<template name="rooms">
+    <div class="block">
+        <div class="block__header">
+            <h2>Rooms list</h2>
+        </div>
+        <div class="block__list">
+            {{#each rooms}}
+                {{> room}}
+            {{else}}
+                <div class="block__message">
+                    No rooms yet.
+                </div>
+            {{/each}}
+        </div>
+    </div>
+</template>

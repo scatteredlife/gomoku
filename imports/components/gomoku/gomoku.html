@@ -1,0 +1,45 @@
+﻿<template name="gomoku">
+    <h1 class="text-center game-title">Gomoku game</h1>
+    <div class="gomoku">
+        <div class="col-md-4">
+            {{#if currentRoom}}
+                <div class="block">
+                    <div class="block__header">
+                        <h2>Rooms: {{currentRoom.name}}</h2>
+                    </div>
+                    <div class="block__list">
+
+                        <div class="block__list-item room">
+                            <span class="room__name">Player 1: {{currentRoom.player1Name}}</span>
+                        </div>
+                        <div class="block__list-item room">
+                            <span class="room__name">Player 2: {{currentRoom.player2Name}}</span>
+                        </div>
+                        <div class="block__list-item room">
+                            <span class="room__name">Status: {{currentRoom.status}}</span>
+                        </div>
+                        <div class="block__list-item room">
+                            <span class="room__name">Actions: </span>
+                            <span class="room__actions action">
+                                <span class="actions__button actions__button--leave" data-roomid="{{currentRoom._id}}">Leave room</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            {{else}}
+                {{> rooms}}
+            {{/if}}
+        </div>
+        <div class="col-md-8">
+            {{#if currentRoom}}
+                {{> board room=currentRoom}}
+            {{else}}
+                <form class="create-room">
+                    <p>Create a room to play with your friends.</p>
+                    <input class="form-control create-room__text" type="text" maxlength="30" name="roomName" placeholder="enter your room name" />
+                    <input type="submit" class="create-room__button btn btn-success" value="Create room" />
+                </form>
+            {{/if}}
+        </div>
+    </div>
+</template>

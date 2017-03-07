@@ -1,0 +1,40 @@
+﻿<template name="layout">
+    {{#if authInProcess}}
+        <div class="loading-icon">
+            <div class='uil-squares-css' style='transform: scale(0.2);'>
+                <div>
+                    <div></div>
+                </div>
+                <div>
+                    <div></div>
+                </div>
+                <div>
+                    <div></div>
+                </div>
+                <div>
+                    <div></div>
+                </div>
+                <div>
+                    <div></div>
+                </div>
+                <div>
+                    <div></div>
+                </div>
+                <div>
+                    <div></div>
+                </div>
+                <div>
+                    <div></div>
+                </div>
+            </div>
+        </div>
+    {{else}}
+        {{#if hasLogin}}
+            {{> header}}
+            {{> gomoku}}
+        {{else}}
+            <p>You are not authorized to view this page.</p>
+            <p>Please <a href="/login">login</a> to view this page</p>
+        {{/if}}
+    {{/if}}
+</template>

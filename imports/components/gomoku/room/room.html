@@ -1,0 +1,13 @@
+﻿<template name="room">
+    <div class="block__list-item room">
+        <span class="room__name">{{name}}</span>
+        <span class="room__actions action">
+            {{#if player2}}
+                <span class="actions__button">Full</span>
+            {{else}}
+                <span class="actions__button actions__button--join">Join</span>
+                <span class="actions__button actions__button--delete">Delete</span>
+            {{/if}}
+        </span>
+    </div>
+</template>

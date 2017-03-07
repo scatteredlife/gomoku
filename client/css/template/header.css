@@ -1,0 +1,22 @@
+﻿.header {
+    background-color: black;
+    color: white;
+    padding: 0 15px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.header__username,
+.header__logout a {
+    padding: 10px 15px;
+}
+
+.header__logout a {
+    color: white;
+    display: inline-block;
+}
+
+.header__logout:hover a {
+    background-color: white;
+    color: #323232;
+}
