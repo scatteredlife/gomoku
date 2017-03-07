@@ -1,2 +1,2 @@
 # gomoku
-gomoku using meteor and angular 1
+gomoku using Meteor and Blaze
