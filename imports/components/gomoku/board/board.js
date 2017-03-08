@@ -25,7 +25,7 @@ Template.board.events({
             if (result == "type-o") {
                 winner = currentRoom.player1Name;
             } else if (result == "type-x") {
-                winner = currentRoom.player1Name;
+                winner = currentRoom.player2Name;
             }
 
             let nextPlayer = Meteor.userId() == currentRoom.player1 ? currentRoom.player2Name : currentRoom.player1Name;

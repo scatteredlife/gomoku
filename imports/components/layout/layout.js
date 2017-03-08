@@ -1,6 +1,8 @@
 ﻿import { Template } from 'meteor/templating';
 import './layout.html';
 import './header.html';
+import './loading.html';
+import './notlogin.html';
 
 Template.layout.helpers({
     authInProcess: function() {
