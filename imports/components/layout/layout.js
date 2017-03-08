@@ -12,7 +12,6 @@ Template.layout.helpers({
     },
 
     currentUser: function() {
-        console.log(Meteor.user());
         return Meteor.user();
     }
 });

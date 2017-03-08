@@ -1,5 +1,5 @@
 ﻿import { Template } from 'meteor/templating';
-import { Rooms } from '../../../api/rooms.js';
+import { Rooms } from '/imports/api/rooms.js';
 import './board.html';
 
 Template.board.helpers({
