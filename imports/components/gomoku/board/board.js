@@ -19,7 +19,7 @@ Template.board.events({
         if (currentRoom.lastMoveBy != Meteor.userId() && !currentRoom.boardGrid[x][y].type && !!currentRoom.player2) {
             currentRoom.boardGrid[x][y].type = playerType;
 
-            let result = checkState(currentRoom.boardGrid);
+            let result = checkState(currentRoom.boardGrid, x, y);
             let winner = "";
 
             if (result == "type-o") {
@@ -50,21 +50,27 @@ Template.board.events({
     }
 });
 
-function checkRow(boardGrid) {
-    for (var row = 0; row < boardGrid.length; row ++) {
-        for (var col = 0; col < boardGrid[row].length - 4; col++) {
-            var firstCell = boardGrid[row][col];
+function checkDirection(boardGird, startX, startY, directionX, directionY) {
+    let starRow = startX - 4 >= 0 ? startX - 4 : 0;
+    let endRow = startX + 4 < 16 ? startX + 4 : 15;
+    let starCol = startY - 4 >= 0 ? startY - 4 : 0;
+    let endCol = startY + 4 < 16 ? startY + 4 : 15;
 
-            if (firstCell.type) {
-                var i = 0;
+    let count = 0;
+    for (var i = 0; i < 9; i++) {
+        let row = startX + i*directionX - 4*directionX;
+        let col = startY + i*directionY - 4*directionY;
 
-                while (firstCell.type === boardGrid[row][col+i].type && i < 5) {
-                    i++;
+        if (row <= endRow && row >= 0 && col >= 0 && col <= endCol) {
+            if (boardGird[row][col].type === boardGird[startX][startY].type) {
+                count++;
+
+                if (count === 5) {
+                    return boardGird[startX][startY].type;
                 }
 
-                if (i === 5) {
-                    return firstCell.type;
-                }
+            } else {
+                count = 0;
             }
         }
     }
@@ -72,92 +78,27 @@ function checkRow(boardGrid) {
     return false;
 }
 
-function checkColumn(boardGrid) {
-    for (var col = 0; col < boardGrid[0].length; col ++) {
-        for (var row = 0; row < boardGrid[col].length - 4; row++) {
-            var firstCell = boardGrid[row][col];
+function checkState(boardGrid, x, y) {
 
-            if (firstCell.type) {
-                var i = 0;
-
-                while (firstCell.type === boardGrid[row + i][col].type && i < 5) {
-                    i++;
-                }
-
-                if (i === 5) {
-                    return firstCell.type;
-                }
-            }
-        }
-    }
-
-    return false;
-}
-
-function checkDiagonal(boardGrid) {
-    for (var row = 0; row < boardGrid.length; row ++) {
-        for (var col = 0; col < boardGrid[row].length - 4; col++) {
-            var firstCell = boardGrid[row][col];
-
-            if (firstCell.type) {
-                var i = 0;
-
-                while (firstCell.type === boardGrid[row+ i][col+i].type && i < 5) {
-                    i++;
-                }
-
-                if (i === 5) {
-                    return firstCell.type;
-                }
-            }
-        }
-    }
-
-    return false;
-}
-
-function checkAntiDiagonal(boardGrid) {
-    for (var row = 4; row < boardGrid.length; row ++) {
-        for (var col = 0; col < boardGrid[row].length - 4; col++) {
-            var firstCell = boardGrid[row][col];
-
-            if (firstCell.type) {
-                var i = 0;
-
-                while (firstCell.type === boardGrid[row - i][col + i].type && i < 5) {
-                    i++;
-                }
-
-                if (i === 5) {
-                    return firstCell.type;
-                }
-            }
-        }
-    }
-
-    return false;
-}
-
-function checkState(boardGrid) {
-    let result = checkRow(boardGrid);
+    let result = checkDirection(boardGrid, x, y, 0, 1);
 
     if (result) {
         return result;
     }
 
-    result = checkColumn(boardGrid);
+    result = checkDirection(boardGrid, x, y, 1, 0);
 
     if (result) {
         return result;
     }
 
-    result = checkDiagonal(boardGrid);
+    result = checkDirection(boardGrid, x, y, 1, 1);
 
     if (result) {
         return result;
     }
 
-    result = checkAntiDiagonal(boardGrid);
+    result = checkDirection(boardGrid, x, y, -1, 1);
 
     return result;
 }
