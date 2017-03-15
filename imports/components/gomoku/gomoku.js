@@ -25,42 +25,22 @@ Template.gomoku.events({
             return;
         }
 
-        Rooms.insert({
-            name: roomName,
-            createAt: now.getTime(),
-            player1: Meteor.userId(),
-            player1Name: Meteor.user().username,
-            player2: "",
-            player2Name: "",
-            boardGrid: boardGrid(),
-            lastMoveBy: "",
-            status: "Waiting for other player"
-        }, function(err, id) {
-            Session.set("playerType", "type-o");
-        });
+        Meteor.call("rooms.create", roomName, function(err, result) {
+            if (err) {
+                alert(err.message);
+            } else {
+                Session.set("playerType", "type-o");
+            }
+        })
     },
 
     'click .actions__button--leave': function(event) {
         let currentRoomId = event.target.dataset.roomid;
-        Rooms.remove({_id: currentRoomId});
+
+        Meteor.call("rooms.remove", currentRoomId, function(err) {
+            if (err) {
+                alert(err.message);
+            }
+        });
     }
 });
-
-function boardGrid() {
-    let size = 16;
-    let grid = [];
-
-    for (var i = 0; i < size; i++) {
-        let row = [];
-
-        for (var j = 0; j < size; j++) {
-            let cell = {
-                type: ""
-            };
-            row.push(cell);
-        }
-        grid.push(row)
-    }
-
-    return grid;
-}
